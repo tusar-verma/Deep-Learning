@@ -11,8 +11,8 @@ def calcular_matriz_pesos(patrones, n, k):
     for p in patrones:
         W += np.outer(p, p)
 
-    # Poner los elementos diagonales a cero
-    #np.fill_diagonal(W, 0)
+    # Poner los elementos diagonales ya que las neuronas no se conectan entre sí
+    np.fill_diagonal(W, 0)
 
     return W
 
@@ -56,7 +56,7 @@ def main():
 
     pesos = calcular_matriz_pesos(patrones, n, k)
 
-    print(correr_algoritmo_hopfield_asincronico(np.array([1, 1, 1, -1]), pesos, num_iteraciones=10))
+    print(correr_algoritmo_hopfield_asincronico(np.array([-1, 1, -1, 1]), pesos, num_iteraciones=10))
 
 if __name__ == "__main__":
     main()
