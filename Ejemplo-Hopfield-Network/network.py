@@ -11,8 +11,8 @@ class HopfieldNetwork(object):
         
         # initialize weights
         W = np.zeros((self.num_neuron, self.num_neuron))
-        rho = np.sum([np.sum(t) for t in train_data]) / (num_data*self.num_neuron)
-        
+        #rho = np.sum([np.sum(t) for t in train_data]) / (num_data*self.num_neuron)
+        rho = 0
         # Hebb rule
         for i in tqdm(range(num_data)):
             t = train_data[i] - rho
@@ -53,7 +53,7 @@ class HopfieldNetwork(object):
             # Iteration
             for i in range(self.num_iter):
                 # Update s
-                s = np.sign(self.W @ s - self.threshold)
+                s = np.sign(self.W @ s)
                 # Compute new state energy
                 e_new = self.energy(s)
                 
@@ -77,7 +77,7 @@ class HopfieldNetwork(object):
                     # Select random neuron
                     idx = np.random.randint(0, self.num_neuron) 
                     # Update s
-                    s[idx] = np.sign(self.W[idx].T @ s - self.threshold)
+                    s[idx] = np.sign(self.W[idx].T @ s)
                 
                 # Compute new state energy
                 e_new = self.energy(s)
@@ -91,7 +91,7 @@ class HopfieldNetwork(object):
     
     
     def energy(self, s):
-        return -0.5 * s @ self.W @ s + np.sum(s * self.threshold)
+        return -0.5 * s @ self.W @ s
 
     def plot_weights(self, path):
         plt.figure(figsize=(6, 5))
