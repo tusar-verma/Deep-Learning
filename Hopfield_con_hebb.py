@@ -1,7 +1,7 @@
 import numpy as np
 
 # Ejercicio 21.1 i del capitulo 21 de Neural Networks design
-# consiste en implementar una red de Hopfield con memoria de 2 patrones
+# consiste en implementar una red de Hopfield con memoria de 2 patrones usando la regla de Hebb
 
 def calcular_matriz_pesos(patrones, n, k):
     # Inicializar la matriz de pesos
